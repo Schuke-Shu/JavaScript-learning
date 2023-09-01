@@ -115,9 +115,55 @@ BigInt(str); // 1000000000000000000000000000000000000000000000000000000000000000
 
 // ps：位操作通常可以用于BigInt操作数，Math对象的任何函数都不接受BigInt操作数
 
-// 日期和时间
+// ================
+// ==  日期和时间  ==
+// ================
 // js定义了Date类，Date是对象，也可用数值表示（1970年1月1日零点至今的毫秒数，也称为时间戳）
 console.log(Date.now());        // 当前时间的时间戳（数值）
 console.log(now = new Date());  // 当前时间的日期对象
 console.log(now.getTime());     // 转换为毫秒时间戳
 console.log(now.toISOString()); // 转换为标准格式的字符串
+
+// ===========
+// ==  文本  ==
+// ===========
+/*
+    js中表示文本的类型是String，即字符串
+    字符串是不可修改的Unicode字符序列，每个字符是一个16位值
+    字符串的length属性为包含的字符数量
+    字符串与数组一样使用基于0的索引，第一个值下标为0，第二个下标为1...
+    空字符串是长度为0的字符串
+    js没有为单个字符设计类型，要表示单个字符时，使用长度为1的字符串
+ */
+/*
+    码点：
+    js使用Unicode字符集的UTF-16编码，因此js字符串是无符号16位值的序列
+    常用的Unicode字符的码点是16位的，可以用字符串中的一个元素表示
+    码点超出16位的Unicode字符使用UTF-16规则编码为两个16位值的序列，意味着一个长度为2的字符串可能只是表示一个Unicode字符
+ */
+euro = '€';
+love = '💙';
+console.log(euro + '的长度为：' + euro.length); // 长度为1，这是一个16位的元素
+console.log(love + '的长度为：' + love.length); // 长度为2，'💙'的UTF-16编码为'\ud83d\udc99'
+// js操作字符串的方法一般操作的是16位值，而不是字符，所以js不对字符串进行归一化，甚至不保证字符串是格式正确的UTF-16
+// 但在ES6中，字符串是可迭代的，如果对字符串使用for/of循环或...操作符，迭代的是字符而不是16位值
+
+// 字符串字面量
+// js中的字符串可以使用一对匹配的单引号、双引号或反引号定义('|"|`)
+// 只要使用了一种方式定义字符串，该字符串内出现另外两种符号时，都不会被当作字符串界定符
+console.log(""); // 空字符串，length为0的字符串
+console.log('testing');
+console.log('name="jack"');
+console.log("Wouldn't you prefer O'Reilly's book?");
+console.log("it is jack's pet");
+console.log(`"She said 'hi'", hi said.`);
+
+// ES5之后，可以在定义字符串时在行末加上反斜杠'\'，使字符串可以写在多行上
+console.log('this is\na string');
+console.log('this\
+    is \
+a \
+string');
+console.log(`this is
+a
+    string`)
